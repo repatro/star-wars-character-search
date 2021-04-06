@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { ISWCharacter } from '../types';
-import CharacterCard from './CharacterCard';
+import ExpendableCharacterCard from './ExpendableCharacterCard';
 
 interface ICharacterCardsProps {
   characters: Array<ISWCharacter>;
 }
 function CharacterCards({ characters }: ICharacterCardsProps) {
+  const [expandedCardIndex, setExpandedCardIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    setExpandedCardIndex(characters.length < 3 ? 0 : null);
+  }, [characters]);
+
   return (
     <CharacterCardsContainer>
       {characters.map((character, idx) => (
-        <CharacterCard key={idx} character={character} onNameClick={() => {}} />
+        <ExpendableCharacterCard
+          key={idx}
+          character={character}
+          expanded={idx === expandedCardIndex}
+          onNameClick={() => setExpandedCardIndex(idx === expandedCardIndex ? null : idx)}
+        />
       ))}
     </CharacterCardsContainer>
   );
