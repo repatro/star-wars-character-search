@@ -1,8 +1,8 @@
-##Star Wars Character Search
+## Star Wars Character Search
 
 A web application which lets users search for Star Wars characters, and displays known information about them.
 
-###Running
+### Running
 
 In the project directory, run:
 
