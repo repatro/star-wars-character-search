@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Search } from '@styled-icons/bootstrap';
 
 import TextInput from './components/TextInput';
+import CharacterCards from './components/CharacterCards';
 import { getSWCharacters } from './API';
 import { IFetchedList, ISWCharacter } from './types';
 
@@ -50,11 +51,7 @@ function App() {
       </HeaderSection>
       <Title>STAR WARS CHARACTER SEARCH</Title>
       <NarrowCenteredContent>
-        {charactersData.list.map((character, idx) => (
-          <div key={idx} style={{ color: '#dadada' }}>
-            {character.name}
-          </div>
-        ))}
+        <CharacterCards characters={charactersData.list} />
       </NarrowCenteredContent>
     </div>
   );
@@ -75,7 +72,7 @@ const NarrowCenteredHeader = styled.div`
 `;
 
 const NarrowCenteredContent = styled.div`
-  max-width: 500px;
+  max-width: 800px;
   width: 90%;
   margin: auto;
   padding: 25px;
