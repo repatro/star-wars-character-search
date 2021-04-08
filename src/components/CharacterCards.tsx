@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { isEmpty } from 'lodash/fp';
 
 import { ISWCharacter } from '../types';
 import ExpendableCharacterCard from './ExpendableCharacterCard';
@@ -11,7 +12,7 @@ function CharacterCards({ characters }: ICharacterCardsProps) {
   const [expandedCardIndex, setExpandedCardIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    setExpandedCardIndex(characters.length < 3 ? 0 : null);
+    setExpandedCardIndex(!isEmpty(characters) && characters.length < 3 ? 0 : null);
   }, [characters]);
 
   return (
