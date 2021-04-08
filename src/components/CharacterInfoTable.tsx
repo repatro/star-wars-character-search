@@ -10,6 +10,10 @@ interface ICharacterInfoTableProps {
   isVisible?: boolean;
 }
 function CharacterInfoTable({ character, isVisible }: ICharacterInfoTableProps) {
+  function getValueWithSuffix(value: string, suffix: string) {
+    return value === 'unknown' ? value : `${value}${suffix}`;
+  }
+
   return (
     <InfoTable>
       <tbody>
@@ -21,9 +25,9 @@ function CharacterInfoTable({ character, isVisible }: ICharacterInfoTableProps) 
         </tr>
         <tr>
           <th>Height</th>
-          <td>{character.height}cm</td>
+          <td>{getValueWithSuffix(character.height, 'cm')}</td>
           <th>Mass</th>
-          <td>{character.mass}kg</td>
+          <td>{getValueWithSuffix(character.mass, 'kg')}</td>
         </tr>
         <tr>
           <th>Hair Color</th>
@@ -73,6 +77,7 @@ const InfoTable = styled.table`
       padding: 4px;
     }
     th {
+      padding: 5px;
       border-bottom: 1px solid ${tableBorderColor};
       border-right: 1px solid ${tableBorderColor};
       :not(:first-child) {

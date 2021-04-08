@@ -59,6 +59,7 @@ function App() {
 }
 
 const Title = styled.h2`
+  font-size: 20px;
   color: #000000;
   text-align: center;
   text-shadow: 1px 1px 0 #ebe70e, -1px -1px 0 #ebe70e, 1px -1px 0 #ebe70e, -1px 1px 0 #ebe70e, 1px 1px 0 #ebe70e;
@@ -74,7 +75,7 @@ const NarrowCenteredHeader = styled.div`
 
 const NarrowCenteredContent = styled.div`
   max-width: 800px;
-  width: 90%;
+  width: 85%;
   margin: auto;
   padding: 25px;
 `;

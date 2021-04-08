@@ -55,6 +55,7 @@ const ChildrenContainer = styled.div<IChildrenContainerProps>`
 const ErrorText = styled.p`
   text-align: center;
   font-size: 18px;
+  color: #e0dddd;
 `;
 
 export default LoadingWrapper;
