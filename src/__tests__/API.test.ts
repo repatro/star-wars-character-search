@@ -43,5 +43,16 @@ describe('API', () => {
       expect(result).toEqual({ field1: 'val1', field2: 'val2' });
       expect(fakeFetch).not.toBeCalled();
     });
+
+    it('should replace http with https', async () => {
+      fakeFetch.mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ field1: 'val1', field2: 'val2' })
+      });
+      const { getData } = abortableFetch('http://exampleurl.com', exampleSchema);
+      await getData();
+      const calledUrl = fakeFetch.mock.calls[0][0];
+      expect(calledUrl).toBe('https://exampleurl.com');
+    });
   });
 });

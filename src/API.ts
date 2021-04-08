@@ -42,7 +42,8 @@ export function abortableFetch<DataType>(
     if (cache && url in cache) {
       return cache[url];
     }
-    const fetched = await fetch(url, { signal });
+    const preparedUrl = url.replace('http:', 'https:');
+    const fetched = await fetch(preparedUrl, { signal });
     const data = field ? (await fetched.json())[field] : await fetched.json();
     const result = schema.validate(data, { allowUnknown: true, stripUnknown: true });
     if (result.error) {
