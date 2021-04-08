@@ -11,7 +11,8 @@ export const swCharactersSchema = Joi.array()
       height: Joi.string().required(),
       mass: Joi.string().required(),
       skin_color: Joi.string().required(),
-      films: Joi.array().items(Joi.string()).required()
+      films: Joi.array().items(Joi.string()).required(),
+      homeworld: Joi.string().required()
     })
   )
   .required();
@@ -21,3 +22,8 @@ export const swFilmSchema = Joi.object({
   episode_id: Joi.number().required(),
   url: Joi.string().required()
 }).required();
+
+export const swHomeworldSchema = Joi.object({
+  name: Joi.string().required(),
+  url: Joi.string().required()
+});

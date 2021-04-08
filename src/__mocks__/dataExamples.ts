@@ -10,7 +10,8 @@ export const swCharactersExample: Array<ISWCharacter> = [
     gender: 'male',
     height: '172',
     mass: '70',
-    films: []
+    films: [],
+    homeworld: 'Home'
   },
   {
     name: 'Char Name 2',
@@ -21,7 +22,8 @@ export const swCharactersExample: Array<ISWCharacter> = [
     gender: 'female',
     height: '175',
     mass: '55',
-    films: []
+    films: [],
+    homeworld: 'Home'
   },
   {
     name: 'Someone New',
@@ -32,7 +34,8 @@ export const swCharactersExample: Array<ISWCharacter> = [
     gender: 'unknown',
     height: '190',
     mass: '95',
-    films: []
+    films: [],
+    homeworld: 'Home'
   }
 ];
 

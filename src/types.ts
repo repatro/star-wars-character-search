@@ -8,11 +8,17 @@ export interface ISWCharacter {
   mass: string;
   skin_color: string;
   films: Array<string>;
+  homeworld: string;
 }
 
 export interface ISWFilm {
   title: string;
   episode_id: number;
+  url: string;
+}
+
+export interface ISWHomeworld {
+  name: string;
   url: string;
 }
 

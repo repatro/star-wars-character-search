@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { ISWCharacter } from '../types';
 import FilmLabel from './FilmLabel';
+import Homeworld from './Homeworld';
 
 interface ICharacterInfoTableProps {
   character: ISWCharacter;
@@ -33,8 +34,10 @@ function CharacterInfoTable({ character, isVisible }: ICharacterInfoTableProps) 
         <tr>
           <th>Eye Color</th>
           <td>{character.eye_color}</td>
-          <th></th>
-          <td></td>
+          <th>Homeworld</th>
+          <td>
+            <Homeworld url={character.homeworld} isVisible={isVisible} />
+          </td>
         </tr>
         <tr>
           <th>Films</th>

@@ -1,7 +1,7 @@
 import { Schema } from 'joi';
-import { swCharactersSchema, swFilmSchema } from './schemas';
 
-import { ISWCharacter, ISWFilm } from './types';
+import { swCharactersSchema, swFilmSchema, swHomeworldSchema } from './schemas';
+import { ISWCharacter, ISWFilm, ISWHomeworld } from './types';
 
 const SW_API_URL = 'https://swapi.dev/api';
 
@@ -11,9 +11,14 @@ export function getSWCharacters(search?: string) {
   return swCharactersDataFetch(`${SW_API_URL}/people/${paramsPart}`);
 }
 
-const swFilmByIdDataFetch = getFetchData<ISWFilm>(swFilmSchema, undefined, true);
+const swFilmByUrlDataFetch = getFetchData<ISWFilm>(swFilmSchema, undefined, true);
 export function getSWFilmByUrl(url: string) {
-  return swFilmByIdDataFetch(url);
+  return swFilmByUrlDataFetch(url);
+}
+
+const swHomeworldByUrlDataFetch = getFetchData<ISWHomeworld>(swHomeworldSchema, undefined, true);
+export function getSWHomeworldByUrl(url: string) {
+  return swHomeworldByUrlDataFetch(url);
 }
 
 function getFetchData<DataType>(schema: Schema, field?: string, useCache?: boolean) {
