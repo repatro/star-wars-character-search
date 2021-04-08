@@ -12,22 +12,36 @@ describe('API', () => {
   const fakeFetch = jest.fn();
   window.fetch = fakeFetch;
 
-  it('should return result trimmed to schema', async () => {
-    fakeFetch.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ field1: 'val1', field2: 'val2', unknown: 'unknown' })
-    });
-    const { getData } = abortableFetch('https://exampleurl.com', exampleSchema);
-    const result = await getData();
-    expect(result).toEqual({ field1: 'val1', field2: 'val2' });
+  beforeEach(() => {
+    fakeFetch.mockReset();
   });
 
-  it('should throw error if required field is missing in result', async () => {
-    fakeFetch.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ field1: 'val1' })
+  describe('abortableFetch', () => {
+    it('should return result trimmed to schema', async () => {
+      fakeFetch.mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ field1: 'val1', field2: 'val2', unknown: 'unknown' })
+      });
+      const { getData } = abortableFetch('https://exampleurl.com', exampleSchema);
+      const result = await getData();
+      expect(result).toEqual({ field1: 'val1', field2: 'val2' });
     });
-    const { getData } = abortableFetch('https://exampleurl.com', exampleSchema);
-    await expect(getData()).rejects.toThrowError();
+
+    it('should throw error if required field is missing in result', async () => {
+      fakeFetch.mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ field1: 'val1' })
+      });
+      const { getData } = abortableFetch('https://exampleurl.com', exampleSchema);
+      await expect(getData()).rejects.toThrowError();
+    });
+
+    it('should use cache', async () => {
+      const cacheMock = { 'https://exampleurl.com': { field1: 'val1', field2: 'val2' } };
+      const { getData } = abortableFetch('https://exampleurl.com', exampleSchema, undefined, cacheMock);
+      const result = await getData();
+      expect(result).toEqual({ field1: 'val1', field2: 'val2' });
+      expect(fakeFetch).not.toBeCalled();
+    });
   });
 });

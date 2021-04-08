@@ -9,6 +9,7 @@ interface IExpendableCharacterCardProps {
   expanded?: boolean;
   onNameClick(): void;
 }
+
 function ExpendableCharacterCard({ character, expanded, onNameClick }: IExpendableCharacterCardProps) {
   return (
     <Card>
@@ -16,7 +17,7 @@ function ExpendableCharacterCard({ character, expanded, onNameClick }: IExpendab
         {character.name}
       </CharacterNameBtn>
       <ExpandedInfoContainer expanded={expanded} data-expanded={expanded}>
-        <CharacterInfoTable character={character} />
+        <CharacterInfoTable character={character} isVisible={expanded} />
       </ExpandedInfoContainer>
     </Card>
   );
@@ -59,7 +60,7 @@ interface IExpandedInfoContainerProps {
   expanded?: boolean;
 }
 const ExpandedInfoContainer = styled.div<IExpandedInfoContainerProps>`
-  max-height: ${(props) => (props.expanded ? '200px' : 0)};
+  max-height: ${(props) => (props.expanded ? '450px' : 0)};
 
   overflow: hidden;
   transition: max-height 0.2s linear;

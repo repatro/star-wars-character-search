@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import CharacterCards from '../CharacterCards';
 import { swCharactersExample } from '../../__mocks__/dataExamples';

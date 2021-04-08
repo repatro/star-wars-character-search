@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { ISWCharacter } from '../types';
+import FilmLabel from './FilmLabel';
 
 interface ICharacterInfoTableProps {
   character: ISWCharacter;
+  isVisible?: boolean;
 }
-function CharacterInfoTable({ character }: ICharacterInfoTableProps) {
+function CharacterInfoTable({ character, isVisible }: ICharacterInfoTableProps) {
   return (
     <InfoTable>
       <tbody>
@@ -32,6 +35,14 @@ function CharacterInfoTable({ character }: ICharacterInfoTableProps) {
           <td>{character.eye_color}</td>
           <th></th>
           <td></td>
+        </tr>
+        <tr>
+          <th>Films</th>
+          <td colSpan={3}>
+            {character.films.map((url, idx) => (
+              <FilmLabel key={idx} url={url} isVisible={isVisible} />
+            ))}
+          </td>
         </tr>
       </tbody>
     </InfoTable>

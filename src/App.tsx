@@ -17,22 +17,15 @@ function App() {
     fetchCharacters();
   }, []);
 
-  async function fetchCharacters(search?: string) {
+  function fetchCharacters(search?: string) {
+    charactersData.abortLoading?.();
     const { getData, abort } = getSWCharacters(search?.trim().toLowerCase());
-    setCharactersData({ list: [], isLoading: true, abortLoading: abort });
-    try {
-      charactersData.abortLoading?.();
-      const list = await getData();
-      setCharactersData({ list, isLoading: false });
-    } catch (e) {
-      if (!(e instanceof DOMException && e.name === 'AbortError')) {
-        setCharactersData({
-          list: [],
-          isLoading: false,
-          error: e.message
-        });
-      }
-    }
+    setCharactersData({ ...charactersData, isLoading: true, abortLoading: abort });
+    getData()
+      .then((list) => setCharactersData({ list, isLoading: false }))
+      .catch(
+        (e) => e.name !== 'AbortError' && setCharactersData({ ...charactersData, isLoading: false, error: e.message })
+      );
   }
 
   return (
