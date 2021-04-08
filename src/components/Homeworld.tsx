@@ -29,6 +29,6 @@ function Homeworld({ url, isVisible }: IHomeworldProps) {
     }
   }, [isVisible]);
 
-  return <span>{homeworldData.entity ? homeworldData.entity.name : '-'}</span>;
+  return <span>{homeworldData.entity ? homeworldData.entity.name : 'Loading...'}</span>;
 }
 export default Homeworld;

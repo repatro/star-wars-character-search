@@ -6,6 +6,7 @@ import TextInput from './components/TextInput';
 import CharacterCards from './components/CharacterCards';
 import { getSWCharacters } from './API';
 import { IFetchedList, ISWCharacter } from './types';
+import LoadingWrapper from './components/LoadingWrapper';
 
 function App() {
   const [charactersData, setCharactersData] = useState<IFetchedList<ISWCharacter>>({
@@ -44,7 +45,14 @@ function App() {
       </HeaderSection>
       <Title>STAR WARS CHARACTER SEARCH</Title>
       <NarrowCenteredContent>
-        <CharacterCards characters={charactersData.list} />
+        <LoadingWrapper
+          isLoading={charactersData.isLoading}
+          loadingHeight={200}
+          spinningIndicatorSize={50}
+          error={charactersData.error && 'Error fetching characters'}
+        >
+          <CharacterCards characters={charactersData.list} />
+        </LoadingWrapper>
       </NarrowCenteredContent>
     </div>
   );
